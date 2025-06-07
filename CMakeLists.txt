@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)       # C++ Standard setzen
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 
-add_executable(flap main.cpp)   # Erstelle ein Executable aus main.cpp
+add_executable(flap main.cpp obstacle.cpp)   # Erstelle ein Executable aus main.cpp
 
 # SFML-Bibliotheken zum Target linken
 target_link_libraries(flap sfml-graphics sfml-window sfml-system)

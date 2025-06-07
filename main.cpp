@@ -1,13 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <optional>
+#include "obstacle.hpp"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Test");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Flap");
     window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(false);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+
+    obstacle obs= obstacle(window.getSize());
 
     while (window.isOpen()) {
         sf::Event event;
@@ -17,8 +18,9 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        window.draw(shape);
+        obs.draw(window); 
         window.display();
+        obs.move(); 
     }
 
     return 0;
