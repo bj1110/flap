@@ -17,11 +17,14 @@ public:
     obstacle(sf::Vector2u winSize);
     obstacle(float h);
     obstacle(); 
+    ~obstacle(); 
 
     void move(); 
     void draw(sf::RenderWindow& window); 
 
     float getGapWidth();
+    bool isOutOfBounds(); 
+    float getPosX();
 };
 
 

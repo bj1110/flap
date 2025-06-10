@@ -2,13 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <optional>
 #include "obstacle.hpp"
+#include <memory>
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Flap");
     window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(false);
 
-    obstacle obs= obstacle(window.getSize());
+    std::unique_ptr<obstacle> obs= std::make_unique<obstacle>(window.getSize()); 
 
     while (window.isOpen()) {
         sf::Event event;
@@ -18,9 +19,16 @@ int main() {
         }
 
         window.clear(sf::Color::Black);
-        obs.draw(window); 
-        window.display();
-        obs.move(); 
+        if(obs){
+            if(!obs->isOutOfBounds()){
+                obs->draw(window); 
+                obs->move();
+            } else{
+                obs.reset();
+            }
+            window.display();
+        }
+         
     }
 
     return 0;
