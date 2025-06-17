@@ -18,6 +18,10 @@ public:
 
     void draw(sf::RenderWindow& window);
 
+    void move(sf::Event e); 
+
+private:
+    void fall(); 
 };
 
 
