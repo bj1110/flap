@@ -3,22 +3,22 @@
 #include <experimental/random>
 #include <iostream>
 
-obstacle::obstacle(float h, float x): height{h}, pos_x{x}
+obstacle::obstacle(float h, float x): m_height{h}, m_pos_x{x}
 {
 }
 
 obstacle::obstacle(sf::Vector2u winSize)
 {
     int randomheight= std::experimental::randint(10, (int) winSize.y -10 );
-    height= (float) randomheight;
-    pos_x = (float) winSize.x;
+    m_height= (float) randomheight;
+    m_pos_x = (float) winSize.x;
 }
 
-obstacle::obstacle(float h): height{h}, pos_x{0}
+obstacle::obstacle(float h): m_height{h}, m_pos_x{0}
 {
 }
 
-obstacle::obstacle(): height{0}, pos_x{0}
+obstacle::obstacle(): m_height{0}, m_pos_x{0}
 {
 }
 
@@ -31,20 +31,20 @@ obstacle::~obstacle()
 void obstacle::move()
 {
     // std::cout<< "vor diesem Zug ist pox_x: "<<pos_x <<std::endl; 
-    pos_x -= 1;
+    m_pos_x -= 1;
     // std::cout<< "nach diesem Zug ist pox_x: "<<pos_x <<std::endl; 
 }
 
 void obstacle::draw(sf::RenderWindow& window)
 {
     sf::RectangleShape upper, lower;
-    upper.setSize({thickness,height - (gap/2)});
-    upper.setPosition({pos_x-thickness, 0});
-    upper.setFillColor(color);
+    upper.setSize({m_thickness,m_height - (m_gap/2)});
+    upper.setPosition({m_pos_x-m_thickness, 0});
+    upper.setFillColor(m_color);
 
-    lower.setSize({thickness, window.getSize().y - height - (gap/2)});
-    lower.setPosition({pos_x-thickness, height+(gap/2)});
-    lower.setFillColor(color);
+    lower.setSize({m_thickness, window.getSize().y - m_height - (m_gap/2)});
+    lower.setPosition({m_pos_x-m_thickness, m_height+(m_gap/2)});
+    lower.setFillColor(m_color);
     
     window.draw(upper); 
     window.draw(lower); 
@@ -52,12 +52,12 @@ void obstacle::draw(sf::RenderWindow& window)
 
 float obstacle::getGapWidth()
 {
-    return gap;
+    return m_gap;
 }
 
 bool obstacle::isOutOfBounds()
 {
-    if(pos_x<0){
+    if(m_pos_x<0){
         return true;
     }
     return false;
@@ -65,5 +65,5 @@ bool obstacle::isOutOfBounds()
 
 float obstacle::getPosX()
 {
-    return pos_x;
+    return m_pos_x;
 }
