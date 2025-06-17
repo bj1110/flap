@@ -3,6 +3,7 @@
 #include <optional>
 #include "obstacle.hpp"
 #include <memory>
+#include "player.hpp"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Flap");
@@ -10,6 +11,7 @@ int main() {
     window.setVerticalSyncEnabled(false);
 
     std::unique_ptr<obstacle> obs= std::make_unique<obstacle>(window.getSize()); 
+    player player(window.getSize()); 
 
     while (window.isOpen()) {
         sf::Event event;
@@ -26,6 +28,7 @@ int main() {
             } else{
                 obs.reset();
             }
+            player.draw(window); 
             window.display();
         }
          
